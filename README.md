@@ -220,11 +220,18 @@ This approach demonstrates a **production-grade SCD Type 2 implementation** usin
 
 ---
 
-## 📊 Power BI Reporting (In Progress)
+## 📊 Power BI Reporting
 
 The Power BI report connects to curated **Gold layer tables** created in Databricks and is intended to support business reporting and analysis use cases.
 
-![Power BI Report](images/powerbi_report.png)
+### Sales Overview
+![Power BI Report](https://github.com/dataontips/Databricks-End-to-End-Project/blob/b756d4b17d082669f2a2b4efbe4795ef3b32857b/Images/Sales%20Overview.png)
+
+### Product Performance
+![Power BI Report](https://github.com/dataontips/Databricks-End-to-End-Project/blob/b756d4b17d082669f2a2b4efbe4795ef3b32857b/Images/Product%20Performance%20Analysis.png)
+
+### Customer Insights
+![Power BI Report](https://github.com/dataontips/Databricks-End-to-End-Project/blob/b756d4b17d082669f2a2b4efbe4795ef3b32857b/Images/Customer%20Insights.png)
 
 ---
 
