@@ -1,10 +1,39 @@
 # Azure Databricks End-to-End Data Engineering Project
 
+> **Lakehouse Implementation Focused on Analytics Consumption & Power BI Semantic Modeling**
+
+---
+
 ## 📌 Overview
 
-This repository showcases an **end-to-end Data Engineering project built on Azure Databricks**, created as part of my personal portfolio to demonstrate a real-world implementation of the **Medallion Architecture (Bronze, Silver, Gold)** using modern data engineering best practices.
+This repository showcases an **end-to-end Data Engineering project built on Azure Databricks**, created to demonstrate a real-world implementation of the **Medallion Architecture (Bronze, Silver, Gold)** using modern data platform practices.
 
-The project covers **full cloud setup**, **streaming ingestion using Auto Loader**, **batch/stream processing**, **job orchestration**, and **analytical fact table creation**, and is intended to be used as a **personal portfolio project** to demonstrate my hands-on experience to recruiters and hiring managers.
+While the implementation includes core data engineering patterns such as ingestion, transformation, and orchestration, the primary goal is to show **how lakehouse data can be structured into analytics-ready datasets aligned for Power BI and enterprise BI consumption**.
+
+The project covers:
+
+- Full Azure cloud setup  
+- Streaming ingestion using Auto Loader  
+- Batch and transformation pipelines  
+- Job orchestration using Databricks Workflows  
+- Slowly Changing Dimension (SCD) handling  
+- Creation of curated analytical fact tables  
+
+---
+
+## 🎯 Analytics Objective
+
+This project focuses on solving a common modern analytics challenge:
+
+> How do we transform raw lakehouse data into governed, dimensional datasets optimized for reporting and semantic modeling?
+
+Key goals:
+
+- Shape Gold-layer datasets aligned to **star schema modeling**
+- Minimize transformation complexity inside BI tools
+- Implement SCD handling directly in the Lakehouse
+- Demonstrate Databricks → Power BI integration patterns
+- Bridge Data Engineering pipelines with Analytics Engineering outcomes
 
 ---
 
@@ -12,16 +41,24 @@ The project covers **full cloud setup**, **streaming ingestion using Auto Loader
 
 The solution follows a layered architecture based on the **Medallion Architecture** pattern:
 
-**Source → Bronze → Silver → Gold → Fact Tables → Power BI**
+Source → Bronze → Silver → Gold → Fact Tables → Power BI
 
-* **Bronze Layer**: Raw ingestion from ADLS Gen2 using Databricks Auto Loader
-* **Silver Layer**: Data cleansing, standardization, and business entity separation
-* **Gold Layer**: Business-ready dimensions, facts, and SCD handling
-* **Power BI**: Reporting and analytics layer (in progress)
+The architecture is intentionally designed so that the **Gold layer behaves like a dimensional warehouse**, enabling efficient analytical querying rather than leaving modeling responsibility to reporting tools.
 
-### 🔁 Databricks Job Orchestration
+| Layer | Purpose |
+|------|---------|
+| Bronze | Raw ingestion from ADLS Gen2 using Auto Loader |
+| Silver | Data cleansing, validation, and standardization |
+| Gold | Business-ready dimensions, facts, and SCD modeling |
+| Power BI | Semantic modeling and reporting layer |
 
-The pipeline is orchestrated using **Databricks Jobs**, where each layer depends on the successful completion of the previous one.
+---
+
+## 🔁 Databricks Job Orchestration
+
+The pipeline is orchestrated using **Databricks Jobs**, where each layer depends on successful completion of the previous one.
+
+This mirrors real-world production pipelines where raw data is progressively refined into trusted analytical assets.
 
 ![Databricks Pipeline Architecture](https://github.com/dataontips/Databricks-End-to-End-Project/blob/462676906cd612c576f80b4fef07b217c6388e44/Images/databricks_pipeline.png)
 
@@ -29,200 +66,155 @@ The pipeline is orchestrated using **Databricks Jobs**, where each layer depends
 
 ## 🔧 Technologies Used
 
-* **Cloud Platform**: Microsoft Azure
-* **Data Processing**: Azure Databricks (PySpark)
-* **Storage**: Azure Data Lake Storage Gen2 (ADLS)
-* **Ingestion**: Databricks Auto Loader
-* **Architecture Pattern**: Medallion Architecture
-* **Orchestration**: Databricks Jobs
-* **Metastore**: Unity Catalog (Metastore & External Locations)
-* **Version Control**: GitHub
+- **Cloud Platform:** Microsoft Azure  
+- **Data Processing:** Azure Databricks (PySpark)  
+- **Storage:** Azure Data Lake Storage Gen2 (ADLS)  
+- **Ingestion:** Databricks Auto Loader  
+- **Architecture Pattern:** Medallion Architecture  
+- **Orchestration:** Databricks Jobs  
+- **Governance:** Unity Catalog  
+- **Version Control:** GitHub  
+
+These tools simulate a **modern Microsoft analytics ecosystem** where Databricks performs transformation and Power BI consumes curated datasets.
 
 ---
 
 ## ☁️ Azure Resources Created
 
-All resources were provisioned and configured manually as part of the project:
+All infrastructure was provisioned manually as part of the implementation:
 
-* Azure Resource Group
-* Azure Storage Account (ADLS Gen2)
+- Azure Resource Group  
+- Azure Storage Account (ADLS Gen2)
+  - Containers for source, bronze, silver, and gold layers  
+- Azure Databricks Workspace  
+- Databricks Access Connector  
+- Unity Catalog Metastore  
+- External Locations & Storage Credentials  
 
-  * Containers for source, bronze, silver, and gold layers
-* Azure Databricks Workspace
-* Databricks Access Connector
-* Unity Catalog Metastore
-* External Locations & Storage Credentials
+This setup reflects a governed Lakehouse deployment model with separation of storage, compute, and catalog.
 
 ---
 
 ## 📂 Project Structure
 
-> The data files included in this repository are **sample datasets** used for demonstration and portfolio purposes only.
+> The data files included are **sample datasets** used for demonstration purposes only.
 
 ````text
-Databricks-ETE-Project/
+Databricks-End-to-End-Project
 │
-├── data/                  # Sample source data (Parquet)
-│   ├── customer_first.parquet
-│   ├── customers_second.parquet
-│   ├── orders_first.parquet
-│   ├── orders_second.parquet
-│   ├── products_first.parquet
-│   ├── products_second.parquet
-│   └── regions.parquet
-│
-├── notebooks/             # Databricks notebooks (.dbc export)
-│   └── Databricks_ETE_Project.dbc
-│
-├── images/                # Architecture & report screenshots
-│   ├── databricks_pipeline.png
-│   └── powerbi_report.png
-│
-├── power_bi/              # Power BI report
-│   └── sales_analytics.pbix   # (In Progress)
-│
-└── README.md
-
-Databricks-ETE-Project/
-│
-├── bronze_layer/
-│   └── bronze_autoloader.dbc
-│
-├── silver_layer/
-│   ├── silver_customers.dbc
-│   ├── silver_orders.dbc
-│   └── silver_products.dbc
-│
-├── gold_layer/
-│   ├── gold_customers.dbc
-│   ├── gold_products_dlt.dbc
-│   └── fact_orders.dbc
-│
-├── power_bi/
-│   └── sales_analytics.pbix   # (In Progress)
-│
-├── jobs/
-│   └── job_orchestration_diagram.png
-│
+├── Data Files
+├── Images
+├── Power BI Report
+├── Project NoteBooks
 └── README.md
 ````
+
+The structure mirrors how engineering zones are separated in production analytics environments.
 
 ---
 
 ## 🔄 Data Pipeline Flow
+
+Raw Operational Data → Validated Data → Analytics-Ready Dimensions → BI Consumption
+
 
 ---
 
 ## 🧬 Slowly Changing Dimensions (SCD)
 
-This project implements **both SCD Type 1 and SCD Type 2** patterns in the **Gold layer**, demonstrating how dimensional data is handled in real-world data warehouses.
-
-### 🔹 SCD Type 1 – Overwrite History (Customers Dimension)
-
-**Use case:** When historical changes are *not required* (e.g., correcting customer attributes).
-
-**Implemented in:** `gold_customers.py`
-
-**Approach:**
-
-* Source data is read from the **Silver Customers** table
-* Records are de-duplicated on `customer_id`
-* Existing vs new records are identified using a **left join** against the Gold dimension table
-* A **surrogate key (`DimCustomerKey`)** is generated for new records
-* `create_date` and `update_date` are maintained
-* Data is merged into the Gold table using **Delta Lake MERGE**
-
-**Key Logic:**
-
-* Existing records → updated in place
-* New records → inserted
-* No historical versions are preserved
-
-This logic ensures the **latest version of each customer** is always available in the Gold layer.
+This project implements **both SCD Type 1 and SCD Type 2** patterns in the Gold layer, demonstrating dimensional modeling directly inside a Lakehouse.
 
 ---
 
-### 🔹 SCD Type 2 – Preserve History (Products Dimension)
+### 🔹 SCD Type 1 — Overwrite History (Customers Dimension)
 
-**Use case:** When historical changes *must be tracked* (e.g., product price/category changes).
-
-**Implemented in:** `gold_products.py` using **Delta Live Tables (DLT)**
+Used when only the latest version is required.
 
 **Approach:**
 
-* Streaming data is read from the **Silver Products** table
-* Data quality rules are enforced using **DLT expectations**
-* A staging table and streaming view are created
-* Changes are applied using `dlt.apply_changes()` with `stored_as_scd_type = 2`
+- Reads from Silver Customers table  
+- Deduplicates records on `customer_id`  
+- Identifies new vs existing records using joins  
+- Generates surrogate key (`DimCustomerKey`)  
+- Maintains audit timestamps  
+- Uses Delta Lake MERGE for updates  
 
-**Key Features:**
-
-* Maintains full history of product changes
-* Automatically manages:
-
-  * `effective_start_date`
-  * `effective_end_date`
-  * `is_current` flag
-* Each change creates a **new version** of the record
-
-This approach demonstrates a **production-grade SCD Type 2 implementation** using Databricks declarative pipelines.
+**Outcome:**  
+Ensures a clean, current-state dimension optimized for reporting.
 
 ---
 
-## 🔄 Data Pipeline Flow
+### 🔹 SCD Type 2 — Preserve History (Products Dimension)
 
-### 1️⃣ Bronze Layer – Raw Ingestion
+Used when historical tracking is required (e.g., product price/category changes).
 
-* Uses **Databricks Auto Loader** (`cloudFiles`)
-* Ingests Parquet files from ADLS source container
-* Supports schema evolution
-* Checkpointing enabled for fault tolerance
-* Parameterized using Databricks widgets
+**Approach:**
 
-### 2️⃣ Silver Layer – Data Transformation
+- Implemented using Delta Live Tables (DLT)  
+- Applies `dlt.apply_changes()` with `stored_as_scd_type = 2`  
+- Maintains:
+  - `effective_start_date`
+  - `effective_end_date`
+  - `is_current` flag  
 
-* Data cleansing and normalization
-* Type casting and column standardization
-* Business-level entity separation:
+**Outcome:**  
+Enables lifecycle analysis, trend reporting, and historical comparisons.
 
-  * Customers
-  * Orders
-  * Products
+---
 
-### 3️⃣ Gold Layer – Business Aggregates
+## 🔄 Layer Responsibilities
 
-* Curated, analytics-ready tables
-* Gold tables created using standard Spark jobs and DLT
-* Optimized for downstream consumption
+### 1️⃣ Bronze Layer — Raw Ingestion
+
+- Uses Databricks Auto Loader (`cloudFiles`)
+- Ingests Parquet files from ADLS
+- Supports schema evolution
+- Checkpointing ensures reliability
+
+### 2️⃣ Silver Layer — Data Transformation
+
+- Cleansing and normalization
+- Column standardization
+- Business-level entity separation:
+  - Customers
+  - Orders
+  - Products
+
+### 3️⃣ Gold Layer — Analytics Modeling
+
+- Curated dimensional tables
+- Created using Spark jobs and DLT
+- Optimized for BI consumption
 
 ### 4️⃣ Fact Tables
 
-* Creation of `fact_orders` table
-* Designed for BI and analytical use cases
+- `fact_orders` created for analytical workloads
+- Structured for aggregation and filtering
 
 ---
 
 ## 🧩 Orchestration Strategy
 
-* Implemented using **Databricks Jobs**
-* Job dependencies reflect Medallion flow
-* Separate jobs for Bronze, Silver, and Gold layers
-* Supports reruns and failure recovery via checkpoints
+- Implemented using Databricks Jobs
+- Layer dependencies reflect Medallion flow
+- Supports reruns and failure recovery
 
 ---
 
 ## 🔐 Governance & Security
 
-* Unity Catalog enabled
-* External locations configured for ADLS access
-* Centralized metastore for table governance
-* Separation of storage and compute
+- Unity Catalog enabled for centralized governance
+- External locations configured for ADLS access
+- Separation of storage and compute
+- Structured promotion across Bronze → Silver → Gold ensures traceability
 
 ---
 
 ## 📊 Power BI Reporting
 
-The Power BI report connects to curated **Gold layer tables** created in Databricks and is intended to support business reporting and analysis use cases.
+Power BI connects to curated **Gold layer tables** to support business reporting and analytics.
+
+The BI layer consumes pre-modeled datasets so semantic modeling focuses on measures and business logic rather than data shaping.
 
 ### Sales Overview
 ![Power BI Report](https://github.com/dataontips/Databricks-End-to-End-Project/blob/b756d4b17d082669f2a2b4efbe4795ef3b32857b/Images/Sales%20Overview.png)
@@ -237,33 +229,35 @@ The Power BI report connects to curated **Gold layer tables** created in Databri
 
 ## 🚀 Key Highlights
 
-* End-to-end Azure Databricks implementation
-* Production-style Medallion Architecture
-* Streaming + batch hybrid processing
-* Parameterized and reusable pipelines
-* Job-based orchestration
-* Portfolio-ready project structure
+- End-to-end Azure Databricks implementation  
+- Production-style Medallion Architecture  
+- Streaming + batch hybrid processing  
+- Dimensional modeling within the Lakehouse  
+- Designed for BI and semantic model integration  
+- Demonstrates Lakehouse-to-Analytics workflow alignment  
 
 ---
 
 ## 📈 Possible Enhancements
 
-* Add data quality checks using Delta Live Tables expectations
-* CI/CD integration using GitHub Actions
-* Monitoring and alerting via Azure Monitor
-* Power BI dashboard connected to Gold layer
+- Add orchestration via Azure Data Factory  
+- CI/CD integration using GitHub Actions  
+- Monitoring via Azure Monitor  
+- Expand Power BI semantic model  
 
 ---
 
 ## 👤 Author
 
-**Navjeet Singh**
-Data Engineer | Azure | Databricks
+**Navjeet Singh**  
+Analytics Engineer | BI & Lakehouse Integration | Azure | Databricks
 
-This repository is part of my personal portfolio to showcase practical, hands-on experience with Azure Databricks and modern data engineering workflows. If you find it useful, feel free to ⭐ the repository or connect with me.
+This repository demonstrates transforming lakehouse data into analytics-ready models aligned with enterprise BI consumption patterns.
 
 ---
 
 ## 📜 License
 
-This project is for learning and portfolio purposes. You are free to fork and adapt it with attribution.
+This project is for learning and portfolio purposes.  
+You are free to fork and adapt it with attribution.
+
