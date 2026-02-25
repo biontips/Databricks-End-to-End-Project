@@ -250,7 +250,7 @@ The BI layer consumes pre-modeled datasets so semantic modeling focuses on measu
 ## 👤 Author
 
 **Navjeet Singh**  
-Analytics Engineer | BI & Lakehouse Integration | Azure | Databricks
+Lead Analytics Engineer | Enterprise Semantic Architecture | BI & Lakehouse Integration | Azure | Databricks 
 
 This repository demonstrates transforming lakehouse data into analytics-ready models aligned with enterprise BI consumption patterns.
 
