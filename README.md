@@ -1,4 +1,4 @@
-# Azure Databricks End-to-End Data Engineering Project
+# Azure Databricks Lakehouse End-to-End Analytics Project
 
 > **Lakehouse Implementation Focused on Analytics Consumption & Power BI Semantic Modeling**
 
