@@ -6,7 +6,7 @@
 
 ## 📌 Overview
 
-This repository showcases an **end-to-end Data Engineering project built on Azure Databricks**, created to demonstrate a real-world implementation of the **Medallion Architecture (Bronze, Silver, Gold)** using modern data platform practices.
+This repository showcases an **end-to-end Analytics project built on Azure Databricks**, created to demonstrate a real-world implementation of the **Medallion Architecture (Bronze, Silver, Gold)** using modern data platform practices.
 
 While the implementation includes core data engineering patterns such as ingestion, transformation, and orchestration, the primary goal is to show **how lakehouse data can be structured into analytics-ready datasets aligned for Power BI and enterprise BI consumption**.
 
